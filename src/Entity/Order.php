@@ -13,6 +13,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
 use Symfony\Component\Serializer\Attribute\Groups;
 
@@ -24,7 +25,8 @@ use Symfony\Component\Serializer\Attribute\Groups;
         new GetCollection(security: "is_granted('ROLE_BARMAN')"),
         new Post(security: "is_granted('ROLE_SERVEUR')"),
         new Get(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')"),
-        new Patch(security: "is_granted('ROLE_BARMAN')"),
+        new Patch(security: "is_granted('ROLE_SERVEUR') and object.getStatus() != 'payée'"),
+        new Put(security: "is_granted('ROLE_BARMAN')"),
         new Delete(),
 ],)]
 #[ORM\Entity(repositoryClass: OrderRepository::class)]

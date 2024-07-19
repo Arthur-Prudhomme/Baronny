@@ -37,16 +37,20 @@ class Drink
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups(['read', 'write'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?float $price = null;
 
     #[ORM\OneToOne(inversedBy: 'drink', cascade: ['persist', 'remove'])]
+    #[Groups(['read', 'write'])]
     private ?Media $picture = null;
 
     /**

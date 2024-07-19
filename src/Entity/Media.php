@@ -59,7 +59,7 @@ class Media
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable:true)]
     private ?string $path = null;
 
     #[ORM\OneToOne(mappedBy: 'picture', cascade: ['persist', 'remove'])]
@@ -79,7 +79,7 @@ class Media
         return $this->path;
     }
 
-    public function setPath(string $path): static
+    public function setPath(?string $path): static
     {
         $this->path = $path;
 
