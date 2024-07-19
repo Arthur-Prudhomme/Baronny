@@ -24,11 +24,11 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write']],
     forceEager:false,
     operations: [
-        new GetCollection(security: "is_granted('ROLE_BARMAN')"),
-        new Post(security: "is_granted('ROLE_BARMAN')"),
-        new Get(security: "is_granted('ROLE_BARMAN')"),
-        new Patch(security: "is_granted('ROLE_BARMAN')"),
-        new Delete(security: "is_granted('ROLE_BARMAN')"),
+        new GetCollection(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
+        new Post(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
+        new Get(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
+        new Patch(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
+        new Delete(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
 ],)]
 #[ORM\Entity(repositoryClass: DrinkRepository::class)]
 #[UniqueEntity('name')]

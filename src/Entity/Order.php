@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
+use DateTime;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ApiResource(
@@ -22,12 +23,11 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write']],
     forceEager:false,
     operations: [
-        new GetCollection(security: "is_granted('ROLE_BARMAN')"),
-        new Post(security: "is_granted('ROLE_SERVEUR')"),
-        new Get(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')"),
-        new Patch(security: "is_granted('ROLE_SERVEUR') and object.getStatus() != 'payée'"),
-        new Put(security: "is_granted('ROLE_BARMAN')"),
-        new Delete(),
+        new GetCollection(security: "is_granted('ROLE_BARMAN')", securityMessage: 'Unauthorized'),
+        new Post(security: "is_granted('ROLE_SERVEUR')", securityMessage: 'Unauthorized'),
+        new Get(security: "is_granted('ROLE_BARMAN') or is_granted('ROLE_SERVEUR')", securityMessage: 'Unauthorized'),
+        new Patch(security: "is_granted('ROLE_SERVEUR') or is_granted('ROLE_SERVEUR')", securityMessage: 'Unauthorized'),
+        new Put(security: "(is_granted('ROLE_SERVEUR') or is_granted('ROLE_SERVEUR')) and object.getStatus() != 'payée'", securityMessage: 'Unauthorized'),
 ],)]
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -36,32 +36,41 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('read')]
     private ?int $id = null;
 
+    #[Groups('read')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     /**
      * @var Collection<int, Drink>
      */
+    
+    #[Groups(['read', 'write'])]
     #[ORM\ManyToMany(targetEntity: Drink::class, inversedBy: 'orders')]
     private Collection $drinks;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?int $tableNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[Groups(['read', 'write'])]
     private ?User $waiter = null;
 
     #[ORM\ManyToOne(inversedBy: 'ordersBarman')]
+    #[Groups(['read', 'write'])]
     private ?User $barman = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     private ?string $status = null;
 
     public function __construct()
     {
         $this->drinks = new ArrayCollection();
+        $this->date = new \DateTime();
     }
 
     public function getId(): ?int
