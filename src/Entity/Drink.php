@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
+    forceEager:false,
     operations: [
         new GetCollection(security: "is_granted('ROLE_BARMAN')"),
         new Post(security: "is_granted('ROLE_BARMAN')"),
