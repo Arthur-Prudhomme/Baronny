@@ -11,7 +11,24 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ApiResource()]
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+use Symfony\Component\Serializer\Attribute\Groups;
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    operations: [
+        new GetCollection(security: "is_granted('ROLE_BARMAN')"),
+        new Post(security: "is_granted('ROLE_BARMAN')"),
+        new Get(security: "is_granted('ROLE_BARMAN')"),
+        new Patch(security: "is_granted('ROLE_BARMAN')"),
+        new Delete(security: "is_granted('ROLE_BARMAN')"),
+],)]
 #[ORM\Entity(repositoryClass: DrinkRepository::class)]
 #[UniqueEntity('name')]
 class Drink

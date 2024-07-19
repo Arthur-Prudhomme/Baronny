@@ -9,7 +9,25 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 
-#[ApiResource()]
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+use Symfony\Component\Serializer\Attribute\Groups;
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    operations: [
+        new GetCollection(security: "is_granted('ROLE_BARMAN')"),
+        new Post(security: "is_granted('ROLE_SERVEUR')"),
+        new Get(security: "is_granted('ROLE_BARMAN') || is_granted('ROLE_SERVEUR')"),
+        new Put(security: "is_granted('ROLE_BARMAN')"),
+        new Patch(),
+        new Delete(),
+],)]
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
 class Order

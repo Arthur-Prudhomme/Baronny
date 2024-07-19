@@ -23,12 +23,12 @@ use Symfony\Component\Serializer\Attribute\Groups;
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
     operations: [
-        new GetCollection(),
-        new Post(processor: UserPasswordHasherProcessor::class),
-        new Get(),
-        new Put(processor: UserPasswordHasherProcessor::class),
-        new Patch(processor: UserPasswordHasherProcessor::class),
-        new Delete(),
+        new GetCollection(security: "is_granted('ROLE_PATRON')"),
+        new Post(processor: UserPasswordHasherProcessor::class,security: "is_granted('ROLE_PATRON')"),
+        new Get(security: "is_granted('ROLE_PATRON')"),
+        new Put(processor: UserPasswordHasherProcessor::class,security: "is_granted('ROLE_PATRON')"),
+        new Patch(processor: UserPasswordHasherProcessor::class,security: "is_granted('ROLE_PATRON')"),
+        new Delete(security: "is_granted('ROLE_PATRON')"),
 ],)]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
