@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "a9a12bdb-3050-4697-956d-9cb90fae1ef6",
+		"name": "Baronny",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24540297"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{patron_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/users",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{patron_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/users/4",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"patron@patron.com\",\r\n  \"roles\":[\"ROLE_PATRON\"],\r\n  \"plainPassword\": \"patron\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/users",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{patron_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/merge-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"serveur@serveur.com\",\r\n  \"roles\": [\r\n    \"ROLE_SERVEUR\"\r\n  ],\r\n  \"plainPassword\": \"serveur\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/users/4",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{patron_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/users/7",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drinks",
+			"item": [
+				{
+					"name": "Get All Drinks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/drinks",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"drinks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drink",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/drinks/6",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"drinks",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Drink",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"eau\",\r\n  \"price\": 10,\r\n  \"picture\": \"api/medias/6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/drinks",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"drinks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Drink",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/drinks/5",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"drinks",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Drink",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/merge-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"coca\",\r\n  \"price\": 5,\r\n  \"picture\": \"api/medias/6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/drinks/6",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"drinks",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{serveur_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"drinks\": [\r\n    \"api/drinks/6\"\r\n  ],\r\n  \"tableNumber\": 0,\r\n  \"waiter\": \"api/users/4\",\r\n  \"barman\": \"api/users/5\",\r\n  \"status\": \"en cours de préparation\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/orders",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{serveur_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"drinks\": [\r\n    \"api/drinks/6\",\r\n    \"api/drinks/8\"\r\n  ],\r\n  \"tableNumber\": 0,\r\n  \"waiter\": \"api/users/4\",\r\n  \"barman\": \"api/users/5\",\r\n  \"status\": \"en cours de préparation\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/orders/1",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Order Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{serveur_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/merge-patch+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"payée\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}/orders/1",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Media",
+			"item": [
+				{
+					"name": "Get All Medias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base}}/medias",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"medias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Media",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{barman_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/arthu/Pictures/coca.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base}}/medias",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"medias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Connexion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"barman@barman.com\",\r\n  \"password\": \"barman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}/auth",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "https://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "client_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjEzOTA5NTksImV4cCI6MTcyMTM5NDU1OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiY2xpZW50QGNsaWVudC5jb20ifQ.eroXzx1QHLYO3uB4znnM_d51jqk9F9W1iRb2WTYbw3tRusk5sOZMZQoUkK2gx-NPR4f5jrBDRsy9v7jvLukMFbooEymB3g8xLxrch4XxWCQSPX0FG36yfdwcpCZTty23SqxuGLOZgTefJqk-5Ih-PYUE4wwB5yoqawfAlBYcBW1jyhpFqOCESzjhN7rDMbiX5exPabXLFY8hCGqgu7STcaZ0CSs1OEcZpD6VpvRCC1lReIfe65EMVvIuxdC9HZziLVrzXpUIW29jWrCkU9A2MtlC7RF-2DNnB_WYsBjusKDW1POwYZHTKa8o2LHBXg4MSJBMWIBL39ebtymzAsnq1g"
+		},
+		{
+			"key": "patron_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjE0MTI3MjMsImV4cCI6MTcyMTQxNjMyMywicm9sZXMiOlsiUk9MRV9QQVRST04iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJwYXRyb25AcGF0cm9uLmNvbSJ9.DbMBrrRhfXgAn47FLvrSWX804uxvuchJup4EaavfcZiyXTLPbYlLt0BXiFAJ6fhDuVeoRzFLSb7n6d_DAr3thIxfZzuq1aBv9kPn__r0MP4p-NvjDfpg8UBmwf-GW5yKj_Uf_je92kS2CkMlw_MORKht55brxPxw9KJmrWidpuYnct5Iz0wav7nrBFUghbjKJ4InW0iLbQdgCpHVwa_k6fmcRbrUiM5EeekgK_4BO0-ucrL-dEfU5mBlkhMQe-pO83qONFGWRbWYf7agd75NiTppSujY-taLG2lADinysA7_m4Rrq-5RaWWj0L6PovT-5V8Ue6vSrxL7JjmoRXRmaQ",
+			"type": "string"
+		},
+		{
+			"key": "serveur_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjE0MTI0MDcsImV4cCI6MTcyMTQxNjAwNywicm9sZXMiOlsiUk9MRV9TRVJWRVVSIiwiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoic2VydmV1ckBzZXJ2ZXVyLmNvbSJ9.HFJ16R-pB8T6c-V0FcpiBXDMJecjfyC1Yaw4VjOuIqlgDW7LEHfHLP-Kfm2MhgP5QZ41DBplfl7E_gbst0pW5BWNzgXH7y6sYa0yfC1p4L4gLr6lXM5Qg0F41goOYCab8VKd0vmGCKDfSRyaEuNEt9yH2ceFbUbhoE3DEg91_viT4GQnZXCLUIdTGh-JSIQBaCaZ9s3hWjkkPf0Y5x3_1PawRSZdZrWNMWKjkaBsv4AUgVM7wKc4T9zw9W6skHlJ93gGQVyN7m740Np87_lcMlTMymCuJZcoxiQgS1T2zfh_N1w8Qgpa72lmj_xviLdfYDLU9PHQAkDQIaxwIncFYg",
+			"type": "string"
+		},
+		{
+			"key": "barman_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjE0MDc1NzYsImV4cCI6MTcyMTQxMTE3Niwicm9sZXMiOlsiUk9MRV9CQVJNQU4iLCJST0xFX1VTRVIiXSwidXNlcm5hbWUiOiJiYXJtYW5AYmFybWFuLmNvbSJ9.dPKIKLqqq1XJ_vFfZACYcEYLyXT0g5W0ke9nQIOlKZ7tvPd5yf9_WDHr35G8tQAF6p5YD2xzHa6LqfRoTazTjsNQExqDUMNJHEyntRgRIdE3rxu0oxQrHekkPbevSX0PKyOBXIskvlCuXcJ2wXHTkw7btPZ_AHe32cIF7h0LwRsfrXf0FH-78LwxFG6opq6D1YauZ3SKkQucTd46WcHzaffdyv1Uwt-tDpnpqr1Fp392z1prR_nPMNi3J6fnutjlaDMs-JLiCT1R1mNcRqKkShkisGYUDyyQYYzrYf3u-HzvQgxmlMNsH7ZUSV6-wfkZOFHWOa3hzf6a3oF08uF80g",
+			"type": "string"
+		}
+	]
+}
